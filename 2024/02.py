@@ -27,5 +27,5 @@ for report in reports:
                     safe_count_2 += 1
                     break
 
-print("Part 2. Safe Reports = ", safe_count_1)
+print("Part 1. Safe Reports = ", safe_count_1)
 print("Part 2. Safe Reports (Reworked) = ", safe_count_2)
