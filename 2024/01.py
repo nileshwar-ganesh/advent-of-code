@@ -1,6 +1,7 @@
 with open("data") as file:
     content = file.readlines()
 
+# create two list items out of input
 left_list = []
 right_list = []
 for entry in content:
@@ -8,9 +9,11 @@ for entry in content:
     left_list.append(int(val1))
     right_list.append(int(val2))
 
+# sort both in ascending order
 left_list = sorted(left_list)
 right_list = sorted(right_list)
 
+# compare item to item and calculate objective
 total_distance = 0
 similarity_score = 0
 for idx in range(0, len(left_list)):
