@@ -3,34 +3,34 @@ def xmas_word_map(r, c, matrix):
     count = 0
     if 0 <= r - 3 < len(matrix):
         if 0 <= c - 3 < len(matrix):
-            word = data_matrix[r][c] + data_matrix[r-1][c-1] + data_matrix[r-2][c-2] + data_matrix[r-3][c-3]
+            word = matrix[r][c] + matrix[r-1][c-1] + matrix[r-2][c-2] + matrix[r-3][c-3]
             if word == 'XMAS':
                 count += 1
-        word = data_matrix[r][c] + data_matrix[r-1][c] + data_matrix[r-2][c] + data_matrix[r-3][c]
+        word = matrix[r][c] + matrix[r-1][c] + matrix[r-2][c] + matrix[r-3][c]
         if word == 'XMAS':
             count += 1
         if 0 <= c + 3 < len(matrix):
-            word = data_matrix[r][c] + data_matrix[r-1][c+1] + data_matrix[r-2][c+2] + data_matrix[r-3][c+3]
+            word = matrix[r][c] + matrix[r-1][c+1] + matrix[r-2][c+2] + matrix[r-3][c+3]
             if word == 'XMAS':
                 count += 1
     if 0 <= r + 3 < len(matrix):
         if 0 <= c - 3 < len(matrix):
-            word = data_matrix[r][c] + data_matrix[r+1][c-1] + data_matrix[r+2][c-2] + data_matrix[r+3][c-3]
+            word = matrix[r][c] + matrix[r+1][c-1] + matrix[r+2][c-2] + matrix[r+3][c-3]
             if word == 'XMAS':
                 count += 1
-        word = data_matrix[r][c] + data_matrix[r+1][c] + data_matrix[r+2][c] + data_matrix[r+3][c]
+        word = matrix[r][c] + matrix[r+1][c] + matrix[r+2][c] + matrix[r+3][c]
         if word == 'XMAS':
             count += 1
         if 0 <= c + 3 < len(matrix):
-            word =  data_matrix[r][c] + data_matrix[r+1][c+1] + data_matrix[r+2][c+2] + data_matrix[r+3][c+3]
+            word =  matrix[r][c] + matrix[r+1][c+1] + matrix[r+2][c+2] + matrix[r+3][c+3]
             if word == 'XMAS':
                 count += 1
     if 0 <= c - 3 < len(matrix[0]):
-        word = data_matrix[r][c] + data_matrix[r][c-1] + data_matrix[r][c-2] + data_matrix[r][c-3]
+        word = matrix[r][c] + matrix[r][c-1] + matrix[r][c-2] + matrix[r][c-3]
         if word == 'XMAS':
             count += 1
     if 0 <= c + 3 < len(matrix[0]):
-        word = data_matrix[r][c] + data_matrix[r][c+1] + data_matrix[r][c+2] + data_matrix[r][c+3]
+        word = matrix[r][c] + matrix[r][c+1] + matrix[r][c+2] + matrix[r][c+3]
         if word == 'XMAS':
             count += 1
     return count
@@ -42,10 +42,10 @@ def mas_word_map(r, c, matrix):
         if 0 <= c - 1 < c + 1 < len(matrix):
             back_slash = False # to check whether one arm of X is true
             forward_slash = False # to check whether other arm of X is true
-            word = data_matrix[r-1][c-1]+data_matrix[r][c]+data_matrix[r+1][c+1]
+            word = matrix[r-1][c-1] + matrix[r][c] + matrix[r+1][c+1]
             if word == 'MAS' or word == 'SAM':
                 back_slash = True
-            word = data_matrix[r - 1][c + 1] + data_matrix[r][c] + data_matrix[r + 1][c - 1]
+            word = matrix[r-1][c+1] + matrix[r][c] + matrix[r+1][c-1]
             if word == 'MAS' or word == 'SAM':
                 forward_slash = True
             if back_slash and forward_slash:
@@ -55,7 +55,7 @@ def mas_word_map(r, c, matrix):
 with open("data") as file:
     content = file.readlines()
 
-# create a character matix out of file input
+# create a character matrix out of file input
 data_matrix = []
 for line in content:
     data_matrix.append([char for char in line.strip()])
