@@ -1,15 +1,18 @@
 # The initial implementation with itertools ran out of memory with actual data
-# This is referenced from the implementation of Jonathan Paulson
+# Implemented after studying the solution of Jonathan Paulson
 
 with open("data") as file:
     content = file.readlines()
 
+# convert input data into a matrix
 matrix = []
 for line in content:
     test_value, numbers = line.strip().split(":")
     numbers = [int(i) for i in numbers.strip().split()]
     matrix.append([int(test_value), numbers])
 
+# recursive function, which goes through all elements in the number list
+# and compares the end result of operation with test value
 def validity_check(test_value, numbers, is_part_2):
     # if only one element left, check whether the total matches test value
     if len(numbers) == 1:
