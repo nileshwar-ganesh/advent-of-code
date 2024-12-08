@@ -5,34 +5,32 @@ with open("data") as file:
     content = file.readlines()
 
 matrix = []
-max_length = 0
 for line in content:
     test_value, numbers = line.strip().split(":")
     numbers = [int(i) for i in numbers.strip().split()]
-    if len(numbers) > max_length:
-        max_length = len(numbers)
     matrix.append([int(test_value), numbers])
 
-def is_valid(target, ns, p2):
-    if len(ns) == 1:
-        return ns[0]==target
-    if is_valid(target, [ns[0]+ns[1]] + ns[2:], p2):
+def validity_check(test_value, numbers, is_part_2):
+    # if only one element left, check whether the total matches test value
+    if len(numbers) == 1:
+        return numbers[0] == test_value
+    # else, go both ways for part 1: addition and multiplication
+    if validity_check(test_value, [numbers[0] + numbers[1]] + numbers[2:], is_part_2):
         return True
-    if is_valid(target, [ns[0]*ns[1]] + ns[2:], p2):
+    if validity_check(test_value, [numbers[0] * numbers[1]] + numbers[2:], is_part_2):
         return True
-    if p2 and is_valid(target, [int(str(ns[0])+str(ns[1]))] + ns[2:], p2):
+    # for part 2, introduce concatenation operator as well
+    if is_part_2 and validity_check(test_value, [int(str(numbers[0])+str(numbers[1]))] + numbers[2:], is_part_2):
         return True
-    return False
 
-p1=0
-p2=0
+total_calibration_1 = 0
+total_calibration_2 = 0
 for entry in matrix:
-    target, ns = entry[0], entry[1]
-    if is_valid(target, ns, p2=False):
-        p1 += target
-    if is_valid(target, ns, p2=True):
-        p2 += target
+    test_value, numbers = entry[0], entry[1]
+    if validity_check(test_value, numbers, is_part_2=False):
+        total_calibration_1 += test_value
+    if validity_check(test_value, numbers, is_part_2=True):
+        total_calibration_2 += test_value
 
-print(p1)
-print(p2)
-
+print("Part 1. Total calibration (for operators + and *) = ", total_calibration_1)
+print("Part 2. Total calibration (for operators +, * and ||) = ", total_calibration_2)
