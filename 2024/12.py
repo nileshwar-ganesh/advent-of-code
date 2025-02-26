@@ -22,9 +22,31 @@ def find_perimeter(plot):
             perimeter += 1
     return perimeter
 
+def find_edges():
+    sides = 0
+    direction = [(-1, 0), (0, -1), (0, 1), (1, 0)]
+    edge_memory = {}
+    for plot in plot_positions:
+        for d in direction:
+            r = plot[0] + d[0]
+            c = plot[1] + d[1]
+            if (r, c) not in plot_positions:
+                key = "r({}, {})".format(r, d[0])
+                if key not in edge_memory.keys():
+                    edge_memory[key] = [c]
+                else:
+                    edge_memory[key].append(c)
+                key = "c({}, {})".format(c, d[1])
+                if key not in edge_memory.keys():
+                    edge_memory[key] = [r]
+                else:
+                    edge_memory[key].append(r)
+    print(edge_memory)
+    return sides
+
 
 # read from data file
-with open("data") as file:
+with open("example") as file:
     content = file.readlines()
 
 matrix = []
@@ -42,7 +64,8 @@ for row, entries in enumerate(matrix):
             perimeter = 0
             for plot in sorted(plot_positions):
                 perimeter += find_perimeter(plot)
+            find_edges()
             fencing += area * perimeter
-            print(matrix[row][col], area, perimeter, fencing)
+
 
 print(fencing)
